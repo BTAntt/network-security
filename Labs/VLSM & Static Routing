@@ -1,1 +1,68 @@
+ VLSM  Demonstration Notes: 
+- The rule of thumb when it comes to subnetting with VLSM the trick is  identifying which LAN ( Local Area Network) has the largest number of hosts. Once determined proceed to find the designated network address and broadcast address. 
 
+The diagram suggest that LAN2 contains the largest number of hosts so we will need to identify its network and broadcast address first. 
+
+- In this case the following information has been identified: 
+	- Network Address 192.168.5.0
+	- Broadcast Address 192.168.5.127
+	- First Usable Address: 192.168.5.1
+	- Last Usable Address:  192.168.5.126
+	- Number of Hosts: 128 host address 
+
+based on the number of hosts with the LAN2 network area a /25 prefix length will be required for the IP address.
+
+[[IP Subnet Calculator](https://www.calculator.net/ip-subnet-calculator.html)]
+
+- Use table link as reference to prefix length calculation and determination. 
+---
+
+When configuring routers its important to know that we want to use the **last usable address to configure the routers. 
+- In this case the IP address would be 192.168.5.126. with a specific netmask of 255.255.255.128. 
+	- each prefix length has a designated netmask 
+		- e.g. /25 - 128 /26 - 192 etc. up to /32 
+		- You can look these up online for more information. 
+---
+
+# Command- Line Configurations for Router: 
+- Enter global configuration mode which would be indicated by the # sign
+- then proceed to specify what interface we want to look at  (**This would be the g0/0 interface).
+Command line Sequence:
+``` 
+enable - enters global config mode  
+config t - used to toggle configuration mode 
+interface g0/0 - specified interface you want to estalbish connection 
+ip address 192.168.5.126 255.255.255.128 (this would capture a /26 prefix length)
+no shutdown
+
+**once the noshutdown command is used you have successful turned on the g0/0 interface and assigned an IPv4 address. 
+
+Note: add one to the broadcast address found in LAN2. This IP address will be come the new network address for LAN1. continue this sequence and configure for all remaining LANs. 
+
+
+Quick Tip: 
+If you want to see if the interface is online and configured properly
+in global configuration mode use the following command:
+
+R1(config)#do show ip int g0/0 
+
+This will show you the associated assigned IP address and its corresponding statues.
+```
+
+For the point-to-point connection between both R1-R2 you will have to use a prefix length of /31 which ensure there will be two usable host addresses. 
+
+
+# Static Routing: 
+- Once all the LAN have been configured now we need to configure static routes to ensure PCs have two way communications amongst each other given they are in different local area networks.
+- Will need to use the **endpoints network address and map it to the routers network address
+- First will configure endpoint PC1 and PC2 to route towards R2 
+- You'll need to open the command-line on R2 and type the following sequence: 
+ ```
+ ip route (PC1 network address) 192.168.5.128 (netmask) 255.255.255.255.192 (destination IP of R2) 192.168.5.255
+ ```
+
+- Repeat this process for endpoints PC3 and PC4 
+	- To ensure endpoints can communicate to  each other try "pinging" PC1 to PC4 to ensure connective across network topology. 
+
+# Why This Matters
+Subnetting, VLSM, and baseline configurations translate security governance into enforceable, auditable network controls by defining trust boundaries, limiting host exposure, and enforcing approved connectivity.
