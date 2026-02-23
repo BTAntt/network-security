@@ -1,4 +1,4 @@
- VLSM  Demonstration Notes: 
+  ## VLSM  Demonstration Notes: 
 - The rule of thumb when it comes to subnetting with VLSM the trick is  identifying which LAN ( Local Area Network) has the largest number of hosts. Once determined proceed to find the designated network address and broadcast address. 
 
 The diagram suggest that LAN2 contains the largest number of hosts so we will need to identify its network and broadcast address first. 
@@ -24,7 +24,7 @@ When configuring routers its important to know that we want to use the **last us
 		- You can look these up online for more information. 
 ---
 
-# Command- Line Configurations for Router: 
+## Command- Line Configurations for Router: 
 - Enter global configuration mode which would be indicated by the # sign
 - then proceed to specify what interface we want to look at  (**This would be the g0/0 interface).
 Command line Sequence:
@@ -52,7 +52,7 @@ This will show you the associated assigned IP address and its corresponding stat
 For the point-to-point connection between both R1-R2 you will have to use a prefix length of /31 which ensure there will be two usable host addresses. 
 
 
-# Static Routing: 
+## Static Routing: 
 - Once all the LAN have been configured now we need to configure static routes to ensure PCs have two way communications amongst each other given they are in different local area networks.
 - Will need to use the **endpoints network address and map it to the routers network address
 - First will configure endpoint PC1 and PC2 to route towards R2 
@@ -64,5 +64,5 @@ For the point-to-point connection between both R1-R2 you will have to use a pref
 - Repeat this process for endpoints PC3 and PC4 
 	- To ensure endpoints can communicate to  each other try "pinging" PC1 to PC4 to ensure connective across network topology. 
 
-# Why This Matters
+## Why This Matters
 Subnetting, VLSM, and baseline configurations translate security governance into enforceable, auditable network controls by defining trust boundaries, limiting host exposure, and enforcing approved connectivity.
