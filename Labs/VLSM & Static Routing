@@ -1,1 +1,12 @@
+# 🔬 Lab: VLSM Subnetting Demonstration
+
+**Category:** Networking Fundamentals  
+**Focus:** Variable Length Subnet Masking (VLSM), subnet planning  
+**Tools:** Cisco Packet Tracer
+
+---
+
+## 🧠 Overview
+This lab demonstrates how VLSM is used to efficiently allocate IP address space by sizing subnets based on host requirements. 
+The focus is on practical subnet planning, router addressing, and avoiding overlapping or wasted address space in multi‑LAN environments.
 
