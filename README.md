@@ -1,6 +1,5 @@
 ## Overview
-This repository represents my hands‑on journey through core CCNA networking concepts, with an emphasis on understanding how networks actually function in real environments.
-Rather than focusing on theory alone, the content connects networking fundamentals to security engineering decisions, threat analysis, and risk‑informed security practices.
+This repository documents my hands‑on exploration of core networking concepts, aligned with CCNA fundamentals and real‑world network behavior. The focus is on understanding how networks are designed, configured, and operate in practice—beyond theory alone.
 
 ## Topics Covered
 - VLSM (Variable Length Subnet-Masking)
