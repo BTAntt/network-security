@@ -6,13 +6,48 @@ Tools: Cisco Packet Tracer | CISCO IOS
 
  🧠 Overview: 
 This lab demonstrates how VLSM is used to efficiently allocate IP address space by sizing subnets based on host requirements. 
-The focus is on practical subnet planning, router addressing, and avoiding overlapping or wasted address space in multi‑LAN environments.
+The focus is on practical subnet planning, router addressing, and avoiding overlapping or wasted address space in multi‑LAN environments. 
 
 Objectives: 
-- Design subets using VLSM 
+- Design subnets using VLSM 
 - Configure router interfaces 
 - Validate IP addressing and connectivity between endpoint devices
 
 Network Topology:
 4 PCs | 4 Switches | 2 Routers 
+
+**Base Address Space:** `192.168.5.0/24`
+
+---
+
+## Subnet Allocation
+
+Subnets are assigned largest-to-smallest using `2^n - 2` to determine usable hosts per prefix.
+
+| Segment  | Network Address   | Subnet Mask          | Usable Range                        | Prefix |
+|----------|-------------------|----------------------|-------------------------------------|--------|
+| LAN2     | `192.168.5.0`     | `255.255.255.128`    | `192.168.5.1` – `192.168.5.126`    | /25    |
+| LAN1     | `192.168.5.128`   | `255.255.255.192`    | `192.168.5.129` – `192.168.5.190`  | /26    |
+| R1 ↔ R2  | `192.168.5.192`   | `255.255.255.254`    | `192.168.5.193` – `192.168.5.194`  | /31    |
+
+> Each new network address is derived by adding 1 to the previous subnet's broadcast address.
+
+---
+
+## Router Configuration (Cisco IOS)
+
+```bash
+enable
+config t
+interface g0/0
+ip address 192.168.5.126 255.255.255.128
+no shutdown
+```
+
+Static routes are then applied on each router to enable communication across all subnets, validated via cross-subnet ping tests.
+
+---
+
+## Skills Demonstrated
+`IPv4 Subnetting` &nbsp;`VLSM` &nbsp;`Cisco IOS` &nbsp;`Static Routing` &nbsp;`Network Segmentation`
 
